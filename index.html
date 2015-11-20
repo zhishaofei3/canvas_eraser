@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+		body,p,img,dl,dt,dd,ul,ol,h1,h2,h3,h4,h5,h6{margin:0;padding:0;}
+		body{position:relative;font:12px/1.2em Simsun,Arial;color:#666;text-align:left;}
+		ul,ol{list-style:none;}img{border:0 none;}input,select{vertical-align:middle;}table{border-collapse:collapse;}s,em,i{font-style:normal;text-decoration:none;}
+		a{ color: #666;outline:none;text-decoration:none;}a:hover{text-decoration:underline;}
+		.clear{*zoom:1;}.clear:after{clear:both;content:".";display:block;height:0;overflow:hidden;visibility:hidden;zoom:1;}
+
+		.wrap {
+			width: 400px;
+			height: 400px;
+			background: url(image.jpg) 0 0 no-repeat;
+			background-size: cover;
+		}
+	</style>
+</head>
+<body>
+<div id="con" class="wrap">
+	<canvas id="myCanvas" width="400" height="400"></canvas>
+</div>
+<script type="text/javascript">
+
+	var myCanvas = document.getElementById('myCanvas');
+	var gray = myCanvas.getContext('2d');
+	gray.beginPath();
+	gray.fillStyle = "#999";
+	gray.fillRect(0,0,400,400);
+	gray.closePath();
+	gray.globalCompositeOperation="destination-out";
+	var img = new Image();
+	img.src = "mouse.png";
+	img.onload = function () {
+		myCanvas.addEventListener('touchmove', function(e){
+			gray.drawImage(img, e.targetTouches[0].clientX, e.targetTouches[0].clientY, 70, 70);
+		})
+	}
+
+</script>
+</body>
+</html>
